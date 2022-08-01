@@ -1,0 +1,112 @@
+<div class="row g-3 mb-3" role="group" [formGroup]="form">
+  <div class="col-md-6">
+    <label [htmlFor]="id + '-line1'" class="form-label">Line 1*</label>
+    <input
+      [id]="id + '-line1'"
+      [name]="id + '-line1'"
+      autocomplete="address-line1"
+      class="form-control"
+      formControlName="line1"
+      required
+      type="text"
+      [ngClass]="{
+        'is-invalid': line1FC?.invalid && (line1FC?.touched || line1FC?.dirty)
+      }"
+      (blur)="onTouched()"
+    />
+    <div class="invalid-feedback">Address line 1 is required</div>
+  </div>
+  <div class="col-md-6">
+    <label [htmlFor]="id + '-line2'" class="form-label">Line 2</label>
+    <input
+      [id]="id + '-line2'"
+      [name]="id + '-line2'"
+      autocomplete="address-line2"
+      class="form-control"
+      formControlName="line2"
+      type="text"
+      (blur)="onTouched()"
+    />
+  </div>
+  <div class="col-md-3">
+    <label for="city" class="form-label">City*</label>
+    <input
+      [id]="id + '-city'"
+      [name]="id + '-city'"
+      autocomplete="address-level2"
+      class="form-control"
+      formControlName="city"
+      required
+      type="text"
+      [ngClass]="{
+        'is-invalid': cityFC?.invalid && (cityFC?.touched || cityFC?.dirty)
+      }"
+      (blur)="onTouched()"
+    />
+    <div class="invalid-feedback">City is required</div>
+  </div>
+  <div class="col-md-3">
+    <label for="state" class="form-label">State*</label>
+    <select
+      [id]="id + '-state'"
+      [name]="id + '-state'"
+      autocomplete="address-level1"
+      class="form-control"
+      formControlName="state"
+      required
+      type="text"
+      [ngClass]="{
+        'is-invalid': stateFC?.invalid && (stateFC?.touched || stateFC?.dirty)
+      }"
+      (blur)="onTouched()"
+    >
+      <option selected disabled value="">Choose...</option>
+      <option>...</option>
+    </select>
+    <div class="invalid-feedback">State is required</div>
+  </div>
+  <div class="col-md-3">
+    <label for="zip" class="form-label">Zip*</label>
+    <input
+      [id]="id + '-zipCode'"
+      [name]="id + '-zipCode'"
+      autocomplete="postal-code"
+      class="form-control"
+      formControlName="zipCode"
+      required
+      type="text"
+      [ngClass]="{
+        'is-invalid':
+          zipCodeFC?.invalid && (zipCodeFC?.touched || zipCodeFC?.dirty)
+      }"
+      (blur)="onTouched()"
+    />
+    <div class="invalid-feedback">Zip code is required</div>
+  </div>
+  <div class="col-md-3">
+    <label for="country" class="form-label">Country*</label>
+    <select
+      [id]="id + '-country'"
+      [name]="id + '-country'"
+      autocomplete="country"
+      class="form-control"
+      formControlName="country"
+      required
+      type="text"
+      [ngClass]="{
+        'is-invalid':
+          countryFC?.invalid && (countryFC?.touched || countryFC?.dirty)
+      }"
+      (blur)="onTouched()"
+    >
+      <option selected disabled value="">Choose...</option>
+      <option
+        *ngFor="let country of COUNTRIES"
+        [value]="country.code.toUpperCase()"
+      >
+        {{ country.name }}
+      </option>
+    </select>
+    <div class="invalid-feedback">Country is required</div>
+  </div>
+</div>

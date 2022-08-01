@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col">
+      <form [formGroup]="profileFormGroup">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name*</label>
+          <input
+            type="name"
+            class="form-control"
+            formControlName="name"
+            id="name"
+            required
+            [ngClass]="{
+              'is-invalid':
+                nameFC?.invalid && (nameFC?.touched || nameFC?.dirty)
+            }"
+          />
+          <div class="invalid-feedback">Name is required</div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            id="email"
+            [ngClass]="{
+              'is-invalid':
+                emailFC?.invalid && (emailFC?.touched || emailFC?.dirty)
+            }"
+          />
+          <div class="invalid-feedback">Please enter valid email</div>
+        </div>
+        <app-address-form formControlName="address"></app-address-form>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="profileFormGroup.invalid"
+        >
+          Submit form
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -67,20 +67,14 @@ export class AddressFormComponent implements ControlValueAccessor, Validator {
   readonly COUNTRIES = COUNTRIES;
 
   //#region Implement ControlValueAccessor
-  writeValue(obj: Address | null): void {
-    obj && this.form.setValue(obj, { emitEvent: false });
+  writeValue(value: Address | null): void {
+    const address = this.createAddress(value);
+    this.form.patchValue(address, { emitEvent: false });
   }
 
   registerOnChange(fn: (val: Partial<Address> | null) => void): void {
     this.form.valueChanges.subscribe((value) => {
-      const address = new Address(
-        value.line1 || "",
-        value.zipCode || "",
-        value.city || "",
-        value.state || "",
-        value.country || "",
-        value.line2
-      );
+      const address = this.createAddress(value);
       fn(address);
     });
   }
@@ -99,7 +93,6 @@ export class AddressFormComponent implements ControlValueAccessor, Validator {
 
   validate(control: AbstractControl<Address>): ValidationErrors | null {
     const value = control.value as Address;
-    console.log(value);
     return value && value.isValid() ? null : { address: true };
   }
 
@@ -124,4 +117,15 @@ export class AddressFormComponent implements ControlValueAccessor, Validator {
   }
 
   //#endregion
+
+  private createAddress(value: Partial<Address> | null) {
+    return new Address(
+      value?.line1 || "",
+      value?.zipCode || "",
+      value?.city || "",
+      value?.state || "",
+      value?.country || "",
+      value?.line2
+    );
+  }
 }

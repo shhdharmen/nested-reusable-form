@@ -11,11 +11,11 @@ export interface AddressForm {
 
 export class Address {
   constructor(
-    public line1: string,
-    public zipCode: string,
-    public city: string,
-    public state: string,
-    public country: string,
+    public line1: string = "",
+    public zipCode: string = "",
+    public city: string = "",
+    public state: string = "",
+    public country: string = "",
     public line2?: string | null
   ) {}
 

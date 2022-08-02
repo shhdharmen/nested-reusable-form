@@ -20,6 +20,7 @@ export class AppComponent {
     }),
     address: this._fb.control(null),
   });
+  address = new Address();
   constructor(private _fb: FormBuilder) {}
 
   get nameFC() {

@@ -1,0 +1,36 @@
+<!-- src/app/reusable-form/reusable-form-wrapper/reusable-form-wrapper.component.html -->
+
+<form [formGroup]="profileFormGroup">
+  <div>
+    <label for="name">Name*</label>
+    <input
+      type="name"
+      formControlName="name"
+      id="name"
+      required
+      [ngClass]="{
+        'is-invalid': nameFC?.invalid && (nameFC?.touched || nameFC?.dirty)
+      }"
+    />
+    <div class="invalid-feedback">Name is required</div>
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input
+      type="email"
+      formControlName="email"
+      id="email"
+      [ngClass]="{
+        'is-invalid': emailFC?.invalid && (emailFC?.touched || emailFC?.dirty)
+      }"
+    />
+    <div class="invalid-feedback">Please enter valid email</div>
+  </div>
+  <app-reusable-form formControlName="address"></app-reusable-form>
+  <button type="submit" [disabled]="profileFormGroup.invalid">
+    Submit form
+  </button>
+</form>
+
+<!-- It works with template driver forms, too! -->
+<!-- <app-address-form [(ngModel)]="address"></app-address-form> -->

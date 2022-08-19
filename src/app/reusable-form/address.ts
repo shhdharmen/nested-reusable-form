@@ -1,13 +1,4 @@
-import { FormControl } from "@angular/forms";
-
-export interface AddressForm {
-  line1: FormControl<string>;
-  line2?: FormControl<string | null>;
-  zipCode: FormControl<string>;
-  city: FormControl<string>;
-  state: FormControl<string>;
-  country: FormControl<string>;
-}
+// src/app/reusable-form/address.ts
 
 export class Address {
   constructor(

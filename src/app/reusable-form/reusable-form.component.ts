@@ -1,3 +1,5 @@
+// src/app/reusable-form/reusable-form.component.ts
+
 import { Component } from "@angular/core";
 import {
   AbstractControl,
@@ -11,21 +13,22 @@ import {
   Validators,
 } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { Address, AddressForm } from "./address";
-import { COUNTRIES } from "./countries";
+import { AddressForm } from "../types";
+import { Address } from "./address";
+import { COUNTRIES } from "../countries";
 
 @Component({
-  selector: "app-address-form",
-  templateUrl: "address-form.component.html",
+  selector: "app-reusable-form",
+  templateUrl: "reusable-form.component.html",
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: AddressFormComponent,
+      useExisting: ReusableFormComponent,
       multi: true,
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: AddressFormComponent,
+      useExisting: ReusableFormComponent,
       multi: true,
     },
   ],
@@ -33,9 +36,9 @@ import { COUNTRIES } from "./countries";
     "[id]": "id",
   },
 })
-export class AddressFormComponent implements ControlValueAccessor, Validator {
+export class ReusableFormComponent implements ControlValueAccessor, Validator {
   static nextId = 0;
-  id = `address-input-${AddressFormComponent.nextId++}`;
+  id = `address-input-${ReusableFormComponent.nextId++}`;
 
   form = new FormGroup<AddressForm>({
     line1: new FormControl("", {
@@ -92,7 +95,7 @@ export class AddressFormComponent implements ControlValueAccessor, Validator {
   //#region Implement Validator
 
   validate(control: AbstractControl<Address>): ValidationErrors | null {
-    const value = control.value as Address;
+    const value = control.value;
     return value && value.isValid() ? null : { address: true };
   }
 
